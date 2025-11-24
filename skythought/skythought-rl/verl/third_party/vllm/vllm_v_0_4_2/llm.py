@@ -255,6 +255,9 @@ class LLM:
         while self.llm_engine.has_unfinished_requests():
             step_outputs = self.llm_engine.step()
             for output in step_outputs:
+                print("vllm_v_0_4_2 ================================================")
+                print(len(step_outputs))
+                print("vllm_v_0_4_2 ================================================")
                 if output.finished:
                     outputs.append(output)
                     if use_tqdm:

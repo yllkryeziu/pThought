@@ -3,8 +3,17 @@
 import logging
 from typing import Optional
 
-from ray._private.ray_logging.filters import CoreContextFilter
-from ray._private.ray_logging.formatters import JSONFormatter
+try:
+    from ray._private.ray_logging.filters import CoreContextFilter
+    from ray._private.ray_logging.formatters import JSONFormatter
+except ImportError:
+    # Fallback for newer Ray versions where this private API was removed
+    class CoreContextFilter(logging.Filter):
+        def filter(self, record):
+            return True
+            
+    class JSONFormatter(logging.Formatter):
+        pass
 
 
 def _add_ray_logging(handler: logging.Handler):

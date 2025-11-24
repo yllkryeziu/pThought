@@ -40,15 +40,15 @@ source .venv/bin/activate
 
 # Test run with just 10 samples to verify everything works
 skythought evaluate \
-    --task math500 \
+    --task math_prm800k \
     --model NovaSky-AI/Sky-T1-32B-Preview \
     --backend vllm \
     --backend-args tensor_parallel_size=4 \
     --sampling-params max_tokens=4096,temperature=1.0 \
     --n 8 \
-    --result-dir ./test_results \
+    --result-dir ./results/math \
     --batch-size 32 \
-    --as-test \
-    --overwrite
+    --overwrite \
+    --as-test
 
 echo "Test completed! Check output above for errors."
